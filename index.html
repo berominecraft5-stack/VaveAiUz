@@ -1,981 +1,427 @@
-<!DOCTYPE html><html lang="uz">
+<!DOCTYPE html>
+<html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b16">
-  <meta name="description" content="TECHHUNTER — texnika narxlarini taqqoslang, qurilma muammolariga yechim toping.">
-  <title>TECHHUNTER — Technology Hub</title>  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-    :root {
-      --bg: #080b16;
-      --panel: #111629;
-      --text: #f5f7ff;
-      --muted: #929bb5;
-      --blue: #6c7cff;
-      --cyan: #35e6ff;
-      --border: rgba(255,255,255,.09);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(ellipse at 15% 10%, #28377b55, transparent 40%),
-        radial-gradient(ellipse at 85% 35%, #164b6650, transparent 40%),
-        radial-gradient(ellipse at 50% 100%, #47226a40, transparent 45%);
-      animation: backgroundMove 12s ease-in-out infinite alternate;
-    }
-
-    @keyframes backgroundMove {
-      from { transform: scale(1); }
-      to { transform: scale(1.15) translateY(-15px); }
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1160px, 92%);
-      margin: auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(18px);
-      background: #080b16c9;
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: var(--cyan);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 27px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .nav-links a:hover {
-      color: var(--cyan);
-    }
-
-    .nav-btn, .primary-btn {
-      background: linear-gradient(120deg, #6575ff, #24c9ed);
-      color: white;
-      border: 0;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-weight: 700;
-      transition: .25s;
-    }
-
-    .nav-btn:hover, .primary-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px #566bff45;
-    }
-
-    .hero {
-      padding: 100px 0 75px;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      border: 1px solid #637aff60;
-      background: #6476ff13;
-      color: #aab4ff;
-      padding: 9px 15px;
-      border-radius: 50px;
-      font-size: 12px;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 {
-      font-size: clamp(39px, 7vw, 76px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -3px;
-      max-width: 900px;
-      margin: 0 auto 24px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(100deg, #8291ff, #39e8ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 610px;
-      margin: 0 auto;
-      line-height: 1.8;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .search-box {
-      max-width: 620px;
-      margin: 35px auto 20px;
-      display: flex;
-      gap: 10px;
-      padding: 8px;
-      border: 1px solid #7182ff45;
-      border-radius: 17px;
-      background: #12182b;
-      box-shadow: 0 0 55px #6176ff12;
-    }
-
-    .search-box input {
-      min-width: 0;
-      flex: 1;
-      background: transparent;
-      color: white;
-      border: none;
-      outline: none;
-      padding: 12px;
-    }
-
-    .search-box input::placeholder {
-      color: #77809b;
-    }
-
-    .hero-note {
-      font-size: 11px !important;
-      color: #737e9c !important;
-    }
-
-    .stats {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 55px;
-      margin-top: 55px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 23px;
-      margin-bottom: 6px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    section {
-      padding: 65px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .eyebrow {
-      color: var(--cyan);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: clamp(27px, 4vw, 38px);
-      letter-spacing: -1px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 10px;
-      line-height: 1.7;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: linear-gradient(145deg, #151c32e8, #0e1324e8);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      transition: .3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #5b7aff0a;
-      right: -50px;
-      top: -50px;
-      pointer-events: none;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: #7485ff65;
-      box-shadow: 0 15px 40px #00000025;
-    }
-
-    .icon {
-      width: 49px;
-      height: 49px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      background: #7183ff19;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .card h3 {
-      font-size: 17px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      min-height: 46px;
-    }
-
-    .card-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: var(--cyan);
-      font-size: 12px;
-      font-weight: 700;
-      border: 0;
-      background: transparent;
-    }
-
-    .product-card {
-      padding: 0;
-    }
-
-    .product-image {
-      height: 170px;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle, #33487c80, transparent 65%),
-        #141b30;
-      font-size: 70px;
-    }
-
-    .product-info {
-      padding: 20px;
-    }
-
-    .product-info h3 {
-      font-size: 15px;
-    }
-
-    .product-info p {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    .product-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .price {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--cyan);
-    }
-
-    .compare-btn {
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 9px 11px;
-      color: white;
-      background: #ffffff08;
-      font-size: 11px;
-    }
-
-    .compare-btn:hover {
-      background: #6575ff25;
-    }
-
-    .fixit {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      align-items: center;
-      padding: 35px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: linear-gradient(120deg, #171d35, #101526);
-    }
-
-    .fix-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .fix-option {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      width: 100%;
-      padding: 16px;
-      text-align: left;
-      color: white;
-      background: #ffffff05;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      transition: .2s;
-    }
-
-    .fix-option:hover {
-      border-color: var(--cyan);
-      background: #35e6ff0a;
-    }
-
-    .fix-option span:first-child {
-      font-size: 22px;
-    }
-
-    .fix-option small {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-    }
-
-    .result-box {
-      display: none;
-      margin-top: 15px;
-      padding: 18px;
-      border-radius: 13px;
-      background: #35e6ff0b;
-      border: 1px solid #35e6ff35;
-      font-size: 13px;
-      line-height: 1.8;
-      white-space: pre-line;
-    }
-
-    .ai-panel {
-      text-align: center;
-      border: 1px solid #7485ff38;
-      border-radius: 24px;
-      padding: 45px 25px;
-      background:
-        radial-gradient(ellipse at top, #6476ff1c, transparent 65%),
-        #111629;
-    }
-
-    .ai-icon {
-      font-size: 46px;
-      margin-bottom: 18px;
-    }
-
-    .ai-panel p {
-      color: var(--muted);
-      max-width: 520px;
-      margin: 15px auto 25px;
-      line-height: 1.8;
-      font-size: 13px;
-    }
-
-    .ai-panel .primary-btn {
-      display: inline-block;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 30px 0;
-      margin-top: 40px;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    footer p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 25px;
-      left: 50%;
-      transform: translate(-50%, 20px);
-      background: #202943;
-      border: 1px solid #6575ff60;
-      color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-size: 13px;
-      opacity: 0;
-      pointer-events: none;
-      transition: .3s;
-      z-index: 200;
-      width: max-content;
-      max-width: 90%;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 15px;
-    }
-
-    @media (max-width: 800px) {
-      .nav-links {
-        gap: 13px;
-      }
-
-      .nav-links a {
-        font-size: 11px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .fixit {
-        grid-template-columns: 1fr;
-        padding: 24px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      nav {
-        min-height: 65px;
-        flex-wrap: wrap;
-        padding: 13px 0;
-      }
-
-      .logo {
-        font-size: 19px;
-      }
-
-      .nav-links {
-        order: 3;
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .nav-btn {
-        padding: 10px 12px;
-        font-size: 11px;
-      }
-
-      .hero {
-        padding: 70px 0 45px;
-      }
-
-      .hero h1 {
-        letter-spacing: -1.8px;
-      }
-
-      .search-box {
-        gap: 3px;
-      }
-
-      .search-box .primary-btn {
-        padding: 10px;
-        font-size: 12px;
-      }
-
-      .stats {
-        gap: 25px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .product-image {
-        height: 145px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style></head><body>
-  <header>
-    <nav class="container">
-      <a class="logo" href="#home">TECH<span>HUNTER</span></a>  <div class="nav-links">
-    <a href="#home">Bosh sahifa</a>
-    <a href="#products">Narxlar</a>
-    <a href="#fixit">FIXIT</a>
-    <a href="#ai">AI</a>
-  </div>
-
-  <button class="nav-btn" id="savedBtn">♡ Saqlanganlar <span id="savedCount">0</span></button>
-</nav>
-
-  </header>  <main>
-    <section class="hero container" id="home">
-      <div class="badge">✦ TEXNOLOGIYA YANGI BOSQICHDA</div>  <h1>
-    Texnologiya olami<br>
-    <span class="gradient-text">bitta platformada.</span>
-  </h1>
-
-  <p>
-    Qurilmalarga mos yechimlarni toping, mahsulotlarni o‘rganing
-    va texnologiyadan aqlliroq foydalaning.
-  </p>
-
-  <form class="search-box" id="searchForm">
-    <input id="searchInput" type="search"
-      placeholder="Telefon, noutbuk yoki qurilma muammosi..."
-      aria-label="Mahsulot yoki muammoni qidirish">
-    <button class="primary-btn" type="submit">Qidirish ↗</button>
-  </form>
-
-  <p class="hero-note">Qidiruv mahsulotlar katalogi va texnik yordam bo‘limini tekshiradi.</p>
-
-  <div class="stats">
-    <div class="stat">
-      <strong>01</strong>
-      <span>Bitta platforma</span>
-    </div>
-    <div class="stat">
-      <strong>02</strong>
-      <span>Asosiy xizmatlar</span>
-    </div>
-    <div class="stat">
-      <strong>24/7</strong>
-      <span>Foydalanish imkoniyati</span>
-    </div>
-  </div>
-</section>
-
-<section class="container" id="services">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">PLATFORMAMIZ</div>
-      <h2>Nima kerak bo‘lsa, shu yerda.</h2>
-      <p class="section-description">Texnik hayotingizni osonlashtiradigan vositalar.</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <article class="card">
-      <div class="icon">🛒</div>
-      <h3>Price Hunter</h3>
-      <p>Texnika mahsulotlarini qidiring va mavjud katalogdagi narxlar bilan tanishing.</p>
-      <a class="card-link" href="#products">Mahsulotlarni ko‘rish ↗</a>
-    </article>
-
-    <article class="card">
-      <div class="icon">🛠️</div>
-      <h3>FixIt</h3>
-      <p>Telefon va qurilmalardagi keng tarqalgan muammolar uchun yechimlar toping.</p>
-      <a class="card-link" href="#fixit">Muammoni tekshirish ↗</a>
-    </article>
-
-    <article class="card">
-      <div class="icon">🤖</div>
-      <h3>AI Assistant</h3>
-      <p>Texnologiya haqida savollar bering va qurilmalarni tanlash bo‘yicha maslahat oling.</p>
-      <a class="card-link" href="#ai">AI haqida ↗</a>
-    </article>
-  </div>
-</section>
-
-<section class="container" id="products">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">PRICE HUNTER</div>
-      <h2>Ommabop qurilmalar.</h2>
-      <p class="section-description">Quyidagi narxlar faqat namuna, haqiqiy do‘kon narxlari emas.</p>
-    </div>
-  </div>
-
-  <div class="grid" id="productGrid">
-    <article class="card product-card" data-name="samsung galaxy telefon smartfon">
-      <div class="product-image">📱</div>
-      <div class="product-info">
-        <h3>Samsung Galaxy</h3>
-        <p>Smartfon · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="samsung">♡ Saqlash</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080b14">
+    <meta name="description" content="TECHHUNTER — texnika narxlarini qidirish, telefon muammolariga yechim topish va AI yordamchisidan foydalanish platformasi.">
+
+    <title>TECHHUNTER — Smart Technology Platform</title>
+
+    <!-- CSS fayli -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript fayli -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="#home" class="logo">
+            TECH<span>HUNTER</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#home">Bosh sahifa</a>
+            <a href="#prices">Price Hunter</a>
+            <a href="#fixit">FixIt</a>
+            <a href="#ai">AI Assistant</a>
+        </nav>
+
+        <a href="#prices" class="nav-button">Boshlash ↗</a>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <main>
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    SMART TECHNOLOGY PLATFORM
+                </div>
+
+                <h1>
+                    Texnikani top.
+                    <span>Eng yaxshisini tanla.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Qurilmalarni qidir, narxlarni taqqosla va telefoningdagi
+                    muammolarga yechim top. Barchasi bir joyda.
+                </p>
+
+                <form class="search-box" id="searchForm">
+                    <span class="search-icon">⌕</span>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Telefon, noutbuk yoki boshqa texnika..."
+                        aria-label="Texnika qidirish"
+                    >
+
+                    <button type="submit">Qidirish</button>
+                </form>
+
+                <p class="search-hint">
+                    Masalan: Samsung, iPhone, noutbuk, quloqchin
+                </p>
+
+                <div class="hero-stats">
+                    <div>
+                        <strong>01</strong>
+                        <span>Price Hunter</span>
+                    </div>
+
+                    <div>
+                        <strong>02</strong>
+                        <span>FixIt yordamchi</span>
+                    </div>
+
+                    <div>
+                        <strong>03</strong>
+                        <span>AI Assistant</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-label="Texnologiya dizayni">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="tech-circle">
+                    <div class="tech-symbol">T<span>H</span></div>
+                    <div class="tech-caption">TECHHUNTER</div>
+                    <div class="tech-subcaption">FIND YOUR TECH</div>
+                </div>
+
+                <div class="floating-card floating-card-top">
+                    <span class="floating-icon">⌕</span>
+                    <div>
+                        <strong>Smart Search</strong>
+                        <small>Tezkor qidiruv</small>
+                    </div>
+                </div>
+
+                <div class="floating-card floating-card-bottom">
+                    <span class="floating-icon">⚙</span>
+                    <div>
+                        <strong>FixIt</strong>
+                        <small>Muammoga yechim</small>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+        <section class="services section" id="services">
+            <div class="section-heading">
+                <span class="section-label">IMKONIYATLAR</span>
+                <h2>Bir platforma. <span>Uchta kuchli xizmat.</span></h2>
+                <p>Texnologiya bilan bog‘liq ishlaringni osonlashtir.</p>
+            </div>
+
+            <div class="service-grid">
+
+                <a href="#prices" class="service-card">
+                    <div class="service-icon">⌕</div>
+                    <span class="card-number">01 / SEARCH</span>
+                    <h3>Price Hunter</h3>
+                    <p>Kerakli texnikani qidir va mavjud mahsulotlarni ko‘rib chiq.</p>
+                    <span class="card-link">Qidirishni boshlash ↗</span>
+                </a>
+
+                <a href="#fixit" class="service-card">
+                    <div class="service-icon">⚙</div>
+                    <span class="card-number">02 / SOLUTIONS</span>
+                    <h3>FixIt</h3>
+                    <p>Telefon va qurilmalardagi oddiy muammolar uchun tavsiyalar ol.</p>
+                    <span class="card-link">Yechim topish ↗</span>
+                </a>
+
+                <a href="#ai" class="service-card">
+                    <div class="service-icon">✧</div>
+                    <span class="card-number">03 / AI</span>
+                    <h3>AI Assistant</h3>
+                    <p>Texnologiya haqida savollaringni yozish uchun yordamchi bo‘lim.</p>
+                    <span class="card-link">AI bo‘limi ↗</span>
+                </a>
+
+            </div>
+        </section>
+
+
+        <!-- PRICE HUNTER -->
+        <section class="products section" id="prices">
+            <div class="section-heading">
+                <span class="section-label">PRICE HUNTER</span>
+                <h2>Texnikangni <span>tanla.</span></h2>
+                <p>Mahsulotni qidir yoki saqlangan mahsulotlaringni ko‘r.</p>
+            </div>
+
+            <div class="product-toolbar">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" type="button" data-filter="all">
+                        Barchasi
+                    </button>
+
+                    <button class="filter-btn" type="button" data-filter="phone">
+                        Telefon
+                    </button>
+
+                    <button class="filter-btn" type="button" data-filter="laptop">
+                        Noutbuk
+                    </button>
+
+                    <button class="filter-btn" type="button" data-filter="accessory">
+                        Aksessuar
+                    </button>
+                </div>
+
+                <button class="saved-toggle" id="showSavedBtn" type="button">
+                    ♡ Saqlanganlar
+                </button>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+
+                <article class="product-card" data-category="phone">
+                    <div class="product-visual phone-visual">
+                        <span class="product-emoji">📱</span>
+                        <span class="product-tag">SMARTPHONE</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Telefon</span>
+                        <h3>Samsung Galaxy</h3>
+                        <p>Galaxy seriyasidagi smartfonlar.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Samsung Galaxy mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-category="phone">
+                    <div class="product-visual iphone-visual">
+                        <span class="product-emoji">📱</span>
+                        <span class="product-tag">SMARTPHONE</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Telefon</span>
+                        <h3>Apple iPhone</h3>
+                        <p>iPhone modellarini ko‘rib chiq.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Apple iPhone mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-category="laptop">
+                    <div class="product-visual laptop-visual">
+                        <span class="product-emoji">💻</span>
+                        <span class="product-tag">COMPUTER</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Noutbuk</span>
+                        <h3>Gaming Laptop</h3>
+                        <p>O‘yin va kundalik vazifalar uchun.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Gaming Laptop mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-category="accessory">
+                    <div class="product-visual headphone-visual">
+                        <span class="product-emoji">🎧</span>
+                        <span class="product-tag">AUDIO</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Aksessuar</span>
+                        <h3>Wireless Headphones</h3>
+                        <p>Simsiz quloqchinlar toifasi.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Wireless Headphones mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-category="accessory">
+                    <div class="product-visual tablet-visual">
+                        <span class="product-emoji">▣</span>
+                        <span class="product-tag">TABLET</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Planshet</span>
+                        <h3>Smart Tablet</h3>
+                        <p>O‘qish, ishlash va ko‘ngilochar vazifalar uchun.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Smart Tablet mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-category="accessory">
+                    <div class="product-visual watch-visual">
+                        <span class="product-emoji">⌚</span>
+                        <span class="product-tag">WEARABLE</span>
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-category">Aqlli soat</span>
+                        <h3>Smart Watch</h3>
+                        <p>Aqlli soatlar toifasi.</p>
+
+                        <div class="product-bottom">
+                            <strong class="product-price">Narx kiritilmagan</strong>
+                            <button class="save-btn" type="button" aria-label="Smart Watch mahsulotini saqlash">♡</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="empty-message" id="emptyProducts" hidden>
+                Mahsulot topilmadi. Boshqa nom bilan qidirib ko‘r.
+            </p>
+
+            <p class="section-note">
+                Eslatma: hozircha mahsulotlarning haqiqiy narxlari ulanmagan.
+                Narxlarni taqqoslash uchun keyinchalik do‘konlar ma’lumotlarini qo‘shish kerak.
+            </p>
+        </section>
+
+
+        <!-- FIXIT -->
+        <section class="fixit-section section" id="fixit">
+            <div class="fixit-content">
+                <span class="section-label">FIXIT SUPPORT</span>
+
+                <h2>Qurilmangda <span>muammo bormi?</span></h2>
+
+                <p>
+                    Muammoni tanla. TECHHUNTER senga dastlabki tekshiruv
+                    va xavfsiz yechim bo‘yicha tavsiyalar beradi.
+                </p>
+
+                <div class="problem-buttons">
+                    <button class="problem-btn" type="button" data-problem="battery">
+                        🔋 Telefon quvvati tez tugaydi
+                    </button>
+
+                    <button class="problem-btn" type="button" data-problem="slow">
+                        ⚡ Telefon sekin ishlaydi
+                    </button>
+
+                    <button class="problem-btn" type="button" data-problem="wifi">
+                        📶 Wi-Fi ulanmayapti
+                    </button>
+
+                    <button class="problem-btn" type="button" data-problem="storage">
+                        💾 Xotira to‘lib qolgan
+                    </button>
+
+                    <button class="problem-btn" type="button" data-problem="charging">
+                        🔌 Telefon quvvat olmayapti
+                    </button>
+                </div>
+
+                <div class="fixit-result" id="fixResult" aria-live="polite">
+                    <strong>FIXIT tayyor!</strong>
+                    <p>Yuqoridagi tugmalardan birini bosib, tavsiya ol.</p>
+                </div>
+            </div>
+
+            <div class="fixit-visual">
+                <div class="fixit-orbit">
+                    <div class="fixit-center">⚙</div>
+                    <span class="fixit-mini mini-one">✓</span>
+                    <span class="fixit-mini mini-two">+</span>
+                    <span class="fixit-mini mini-three">⚡</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- AI ASSISTANT -->
+        <section class="ai-section section" id="ai">
+            <div class="ai-panel">
+                <div class="ai-icon">✧</div>
+
+                <span class="section-label">AI ASSISTANT</span>
+
+                <h2>Texnologiya haqida <span>savolingni ber.</span></h2>
+
+                <p>
+                    Bu bo‘lim AI yordamchisi uchun tayyorlandi.
+                    Hozircha haqiqiy sun’iy intellekt API bilan ulanmagan.
+                </p>
+
+                <form class="ai-form" id="aiForm">
+                    <input
+                        type="text"
+                        id="aiInput"
+                        placeholder="Masalan: Telefonim nega qiziydi?"
+                        aria-label="AI yordamchisiga savol"
+                    >
+
+                    <button type="submit">Yuborish ↗</button>
+                </form>
+
+                <div class="ai-response" id="aiResponse" aria-live="polite">
+                    AI yordamchisi hozircha demo rejimida.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="#home" class="logo">
+            TECH<span>HUNTER</span>
+        </a>
+
+        <p>Texnologiyani osonroq top. Aqlliroq tanla.</p>
+
+        <div class="footer-links">
+            <a href="#prices">Price Hunter</a>
+            <a href="#fixit">FixIt</a>
+            <a href="#ai">AI Assistant</a>
         </div>
-      </div>
-    </article>
 
-    <article class="card product-card" data-name="iphone apple telefon smartfon">
-      <div class="product-image">📲</div>
-      <div class="product-info">
-        <h3>Apple iPhone</h3>
-        <p>Smartfon · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="iphone">♡ Saqlash</button>
+        <div class="footer-bottom">
+            <span>© <span id="currentYear">2026</span> TECHHUNTER</span>
+            <span>Made for technology lovers ✦</span>
         </div>
-      </div>
-    </article>
+    </footer>
 
-    <article class="card product-card" data-name="noutbuk laptop kompyuter">
-      <div class="product-image">💻</div>
-      <div class="product-info">
-        <h3>Noutbuk</h3>
-        <p>Kompyuter · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="laptop">♡ Saqlash</button>
-        </div>
-      </div>
-    </article>
-
-    <article class="card product-card" data-name="quloqchin naushnik headphone">
-      <div class="product-image">🎧</div>
-      <div class="product-info">
-        <h3>Simsiz quloqchin</h3>
-        <p>Aksessuar · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="headphones">♡ Saqlash</button>
-        </div>
-      </div>
-    </article>
-
-    <article class="card product-card" data-name="planshet tablet">
-      <div class="product-image">📟</div>
-      <div class="product-info">
-        <h3>Planshet</h3>
-        <p>Qurilma · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="tablet">♡ Saqlash</button>
-        </div>
-      </div>
-    </article>
-
-    <article class="card product-card" data-name="smart soat smartwatch">
-      <div class="product-image">⌚</div>
-      <div class="product-info">
-        <h3>Smart soat</h3>
-        <p>Aksessuar · Namuna mahsulot</p>
-        <div class="product-bottom">
-          <span class="price">Narx kiritilmagan</span>
-          <button class="compare-btn save-btn" data-id="watch">♡ Saqlash</button>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="container" id="fixit">
-  <div class="fixit">
-    <div>
-      <div class="eyebrow">FIXIT TECH SUPPORT</div>
-      <h2>Qurilmangizda muammo bormi?</h2>
-      <p class="section-description">
-        Muammoni tanlang. Sizga xavfsiz boshlang‘ich tekshiruv
-        va amaliy tavsiyalarni ko‘rsatamiz.
-      </p>
-      <div id="fixResult" class="result-box" aria-live="polite"></div>
-    </div>
-
-    <div class="fix-list">
-      <button class="fix-option" data-fix="charge">
-        <span>🔋</span>
-        <span>Zaryad olmayapti<small>Quvvatlashni tekshirish</small></span>
-      </button>
-
-      <button class="fix-option" data-fix="internet">
-        <span>📶</span>
-        <span>Internet ishlamayapti<small>Aloqani tekshirish</small></span>
-      </button>
-
-      <button class="fix-option" data-fix="slow">
-        <span>🐢</span>
-        <span>Telefon sekin ishlayapti<small>Ishlash tezligini yaxshilash</small></span>
-      </button>
-
-      <button class="fix-option" data-fix="storage">
-        <span>💾</span>
-        <span>Xotira to‘lib qolgan<small>Joy bo‘shatish usullari</small></span>
-      </button>
-    </div>
-  </div>
-</section>
-
-<section class="container" id="ai">
-  <div class="ai-panel">
-    <div class="ai-icon">🤖</div>
-    <div class="eyebrow">AI ASSISTANT</div>
-    <h2>Texnologiya bo‘yicha aqlli yordamchi.</h2>
-    <p>
-      Keyingi bosqichda AI xizmatini ulab, savollarga avtomatik javob
-      beradigan yordamchi yaratamiz. Hozircha bu bo‘lim tayyorlanmoqda.
-    </p>
-    <button class="primary-btn" id="aiBtn">AI imkoniyatlari haqida</button>
-  </div>
-</section>
-
-  </main>  <footer>
-    <div class="container footer-inner">
-      <a class="logo" href="#home">TECH<span>HUNTER</span></a>
-      <p>© <span id="year"></span> TECHHUNTER. Texnologiya hammaga.</p>
-      <p>Yangi imkoniyatlar ustida ishlanmoqda ✦</p>
-    </div>
-  </footer>  <div class="toast" id="toast" role="status" aria-live="polite"></div>  <script>
-    const toast = document.getElementById('toast');
-    let toastTimer;
-
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2600);
-    }
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mahsulotlarni qidirish
-    const searchForm = document.getElementById('searchForm');
-    const searchInput = document.getElementById('searchInput');
-
-    searchForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const query = searchInput.value.trim().toLocaleLowerCase('uz');
-
-      if (!query) {
-        showToast('Avval qidiruv so‘zini kiriting.');
-        searchInput.focus();
-        return;
-      }
-
-      const products = [...document.querySelectorAll('.product-card')];
-      let found = false;
-
-      products.forEach(product => {
-        const name = (product.dataset.name + ' ' +
-          product.querySelector('h3').textContent).toLocaleLowerCase('uz');
-
-        const matches = name.includes(query);
-        product.style.display = matches ? '' : 'none';
-
-        if (matches) found = true;
-      });
-
-      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-
-      if (!found) {
-        showToast('Katalogda topilmadi. FIXIT bo‘limidan ham qidirib ko‘ring.');
-      } else {
-        showToast('Qidiruv natijalari tayyor!');
-      }
-    });
-
-    // Sevimli mahsulotlar
-    const STORAGE_KEY = 'techhunter_saved_products';
-    const productNames = {
-      samsung: 'Samsung Galaxy',
-      iphone: 'Apple iPhone',
-      laptop: 'Noutbuk',
-      headphones: 'Simsiz quloqchin',
-      tablet: 'Planshet',
-      watch: 'Smart soat'
-    };
-
-    function getSaved() {
-      try {
-        const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        return Array.isArray(value)
-          ? value.filter(id => Object.hasOwn(productNames, id))
-          : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function updateSavedUI() {
-      const saved = getSaved();
-
-      document.getElementById('savedCount').textContent = saved.length;
-
-      document.querySelectorAll('.save-btn').forEach(button => {
-        const active = saved.includes(button.dataset.id);
-        button.textContent = active ? '♥ Saqlangan' : '♡ Saqlash';
-        button.setAttribute('aria-pressed', String(active));
-      });
-    }
-
-    document.querySelectorAll('.save-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const id = button.dataset.id;
-        let saved = getSaved();
-
-        if (saved.includes(id)) {
-          saved = saved.filter(item => item !== id);
-          showToast('Sevimlilardan olib tashlandi.');
-        } else {
-          saved.push(id);
-          showToast('Sevimlilarga qo‘shildi!');
-        }
-
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-          updateSavedUI();
-        } catch {
-          showToast('Saqlash uchun brauzer xotirasi mavjud emas.');
-        }
-      });
-    });
-
-    document.getElementById('savedBtn').addEventListener('click', () => {
-      const saved = getSaved();
-
-      if (!saved.length) {
-        showToast('Hozircha saqlangan mahsulot yo‘q.');
-        return;
-      }
-
-      showToast('Saqlanganlar: ' + saved.map(id => productNames[id]).join(', '));
-    });
-
-    updateSavedUI();
-
-    // FIXIT tavsiyalari
-    const fixes = {
-      charge: {
-        title: '🔋 Zaryadlash muammosi',
-        text: '1. Boshqa mos kabel va adapter bilan tekshiring.\n' +
-          '2. Boshqa rozetkadan foydalanib ko‘ring.\n' +
-          '3. Zaryadlash portida chang bor-yo‘qligini tashqaridan tekshiring. Metall buyum tiqmang.\n' +
-          '4. Telefon qizisa, kuygan hid chiqsa yoki batareya shishsa, ishlatishni to‘xtatib, mutaxassisga murojaat qiling.'
-      },
-      internet: {
-        title: '📶 Internet muammosi',
-        text: '1. Wi-Fi yoki mobil internet yoqilganini tekshiring.\n' +
-          '2. Samolyot rejimini yoqib, bir necha soniyadan keyin o‘chiring.\n' +
-          '3. Telefonni qayta ishga tushiring.\n' +
-          '4. Boshqa qurilmada ham internet ishlamasligini tekshiring.'
-      },
-      slow: {
-        title: '🐢 Telefon sekin ishlayapti',
-        text: '1. Ishlatmayotgan ilovalarni yoping.\n' +
-          '2. Telefonni qayta ishga tushiring.\n' +
-          '3. Keraksiz vaqtinchalik fayllarni xavfsiz tozalang.\n' +
-          '4. Operatsion tizim va ilovalar yangilanishini tekshiring.\n' +
-          'Muhim fayllaringizni zaxiralamasdan zavod sozlamalariga qaytarmang.'
-      },
-      storage: {
-        title: '💾 Xotirani bo‘shatish',
-        text: '1. Sozlamalardan xotira bo‘limini oching.\n' +
-          '2. Keraksiz yuklab olingan fayllarni ko‘rib chiqing.\n' +
-          '3. Muhim rasmlar va videolarni zaxiralab, keyin keraksiz nusxalarini o‘chiring.\n' +
-          '4. Ilova ma’lumotlarini o‘chirishdan oldin undagi muhim fayllarni saqlab oling.'
-      }
-    };
-
-    document.querySelectorAll('.fix-option').forEach(button => {
-      button.addEventListener('click', () => {
-        const fix = fixes[button.dataset.fix];
-        const result = document.getElementById('fixResult');
-
-        result.style.display = 'block';
-        result.textContent = fix.title + '\n\n' + fix.text;
-      });
-    });
-
-    document.getElementById('aiBtn').addEventListener('click', () => {
-      showToast('AI ulash keyingi bosqichda amalga oshiriladi.');
-    });
-  </script></body>
+</body>
   </html>
